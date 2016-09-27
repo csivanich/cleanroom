@@ -5,6 +5,7 @@
 # License: MIT
 #
 
+SHELL=bash #${SHELL:-sh}
 DEFAULT_BRANCH="origin/master"
 DIR_BASE="$(mktemp -d)"
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -38,7 +39,17 @@ repo_root_dir(){
     git rev-parse --show-toplevel
 }
 
+set_verbose(){
+    if [[ "$VERBOSE" == "1" ]];then
+        V="-v"
+    else
+        V=""
+    fi
+}
+
 run(){
+    set_verbose
+
     repo_src="$(repo_root_dir)"
     repo_name="$(basename $repo_src)"
     branch="${1:-$DEFAULT_BRANCH}"
@@ -48,16 +59,16 @@ run(){
 
     msg "Creating cleanroom of '$repo_name' ($branch) at '$dest'"
 
-    cp $repo_src -r "$dest" || fail "Could not copy git repo"
+    cp $repo_src $V -r "$dest" || fail "Could not copy git repo"
     cd $dest || fail "Could not change directory to '$dest'"
-    rm ./* -rf || fail "Could not clear repository"
+    rm ./* $V -rf || fail "Could not clear repository"
     git checkout $branch || fail "Could not checkout branch '$branch'"
     git reset --hard
     msg "Completed creating cleanroom of '$repo_name' ($branch) at $dest"
     clear
     msg "In $repo_name ($branch) cleanroom at $dest - exit to destroy"
     (cd $dest; $SHELL)
-    rm $dest -rf || fail "Could not remove directory $dest"
+    rm $dest -rf $V || fail "Could not remove directory $dest"
 }
 
 run $*
