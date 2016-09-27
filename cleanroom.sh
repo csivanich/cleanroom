@@ -52,10 +52,11 @@ run(){
     cd $dest || fail "Could not change directory to '$dest'"
     rm ./* -rf || fail "Could not clear repository"
     git checkout $branch || fail "Could not checkout branch '$branch'"
+    git reset --hard
     msg "Completed creating cleanroom of '$repo_name' ($branch) at $dest"
     clear
     msg "In $repo_name ($branch) cleanroom at $dest - exit to destroy"
-    PWD=$dest $SHELL
+    (cd $dest; $SHELL)
     rm $dest -rf || fail "Could not remove directory $dest"
 }
 
