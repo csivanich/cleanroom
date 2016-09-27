@@ -3,6 +3,8 @@
 
 ###### Copy a repo and open a shell with a clean slate
 
+------
+
 Ever just need a quick peek at git repo's branch, but don't want to stash changes or worry about losing current work? if so, Cleanroom may be for you.
 
 Cleanroom creates a temporary copy of your repository, checks out the requested branch, and opens a shell. When you're done, exit the shell, the temporary copy is deleted, and you're returned to the original repository.
