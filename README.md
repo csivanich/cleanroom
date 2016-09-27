@@ -1,5 +1,6 @@
-Cleanroom
-==========
+![Header](header.png)
+======
+
 ###### Copy a repo and open a shell with a clean slate
 
 Ever just need a quick peek at git repo's branch, but don't want to stash changes or worry about losing current work? if so, Cleanroom may be for you.
