@@ -38,7 +38,7 @@ repo_root_dir(){
     git rev-parse --show-toplevel
 }
 
-do_create(){
+run(){
     repo_src="$(repo_root_dir)"
     repo_name="$(basename $repo_src)"
     branch="${1:-$DEFAULT_BRANCH}"
@@ -57,12 +57,6 @@ do_create(){
     msg "In $repo_name ($branch) cleanroom at $dest - exit to destroy"
     PWD=$dest $SHELL
     rm $dest -rf || fail "Could not remove directory $dest"
-}
-
-# START MAIN LOGIC
-run(){
-    test $# -gt 0 || fail_with_help "No command given"
-    do_create $*
 }
 
 run $*
