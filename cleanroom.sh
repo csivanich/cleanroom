@@ -68,7 +68,7 @@ run(){
     clear
     msg "In $repo_name ($branch) cleanroom at $dest - exit to destroy"
     (cd $dest;export CLEANROOM=1;$SHELL)
-    rm $dest -rf $V || fail "Could not remove directory $dest"
+    rm $DIR_BASE -rf $V || fail "Could not remove directory $dest"
 }
 
 run $*
