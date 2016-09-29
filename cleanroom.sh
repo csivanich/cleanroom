@@ -67,7 +67,7 @@ run(){
     msg "Completed creating cleanroom of '$repo_name' ($branch) at $dest"
     clear
     msg "In $repo_name ($branch) cleanroom at $dest - exit to destroy"
-    (cd $dest; $SHELL)
+    (cd $dest;CLEANROOM=1;$SHELL)
     rm $dest -rf $V || fail "Could not remove directory $dest"
 }
 
